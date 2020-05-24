@@ -17,7 +17,8 @@
         </TabStrip>
         <TabContentItem>
             <StackLayout orientation="vertical">
-                <ListView (swipe)="swipe($event, 'newsList')" [items]="newsList" (itemTap)="onItemTap($event)"
+                <ActivityIndicator *ngIf="isDataLoading"  [busy]="isDataLoading"></ActivityIndicator>
+                <ListView *ngIf="!isDataLoading" (swipe)="swipe($event, 'newsList')" [items]="newsList" (itemTap)="onItemTap($event)"
                     height="100%">
                     <ng-template let-article="item">
                         <GridLayout columns="auto" rows="auto" width="100%"

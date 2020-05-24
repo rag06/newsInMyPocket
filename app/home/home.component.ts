@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
     onButtonTap(): void {
         console.log("Button was pressed");
     }
+    isDataLoading: boolean;
+
 
     textFieldValue: string = "";
 
@@ -58,6 +60,7 @@ export class HomeComponent implements OnInit {
             this.sourceList = JSON.parse(getString("sourceList"));
             this.sourcesCount = getNumber("sourcesCount");
         }
+        this.isDataLoading = false;
     }
 
     ngOnInit(): void {
@@ -87,14 +90,17 @@ export class HomeComponent implements OnInit {
         });
     }
     loadNews() {
+        this.isDataLoading  = true;
         this.http.get(this.serverUrl).subscribe((response) => {
             this.newsList = response['articles'];
             this.count = response['totalResults'];
             setString("newsList", JSON.stringify(this.newsList));
             setNumber("count", this.count);
+            this.isDataLoading  = false;
         });
     }
     loadSources() {
+        this.isDataLoading  = true;
         this.http.get("https://newsapi.org/v2/sources?apiKey=cbcde33bf59b4c799c2860fd2c55b934").subscribe((response) => {
             this.sourceList = response['sources'];
             this.sourcesCount = this.sourceList.length;
