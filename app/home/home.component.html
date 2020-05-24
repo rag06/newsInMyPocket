@@ -1,0 +1,133 @@
+<ActionBar title="News In Your Pocket (newsapi.org)" class=" text-center"
+    backgroundColor="#2C7DF1" color="#fff" fontWeight="600"
+    textAlignment="center">
+</ActionBar>
+<StackLayout>
+    <Tabs height="100%">
+        <TabStrip>
+            <TabStripItem>
+                <Label text="Headlines ({{count}}) "></Label>
+            </TabStripItem>
+            <TabStripItem>
+                <Label text="Sources ({{sourcesCount}})"></Label>
+            </TabStripItem>
+            <TabStripItem>
+                <Label text="Search ({{searchCount}})"></Label>
+            </TabStripItem>
+        </TabStrip>
+        <TabContentItem>
+            <StackLayout orientation="vertical">
+                <ListView [items]="newsList" (itemTap)="onItemTap($event)"
+                    height="100%">
+                    <ng-template let-article="item">
+                        <GridLayout columns="auto" rows="auto" width="100%"
+                            height="230px">
+
+                            <StackLayout orientation="vertical" width="100%">
+                                <Image class="newImage"
+                                    src="{{article?.urlToImage}}">
+                                </Image>
+                                <Label class="heading" textwrap="true"
+                                    verticalAlignment="bottom"
+                                    horizontalAlignment="left"
+                                    text="{{article?.title}}">
+                                </Label>
+                                <Label textwrap="true"
+                                    verticalAlignment="bottom"
+                                    horizontalAlignment="left"
+                                    text="{{article?.description}}">
+                                </Label>
+
+                                <FlexboxLayout flexDirection="row-reverse">
+                                    <Label text="- {{article?.source?.name}}"
+                                        flexGrow="1"></Label>
+                                    <Label
+                                        text="{{article?.publishedAt | date: 'yyyy/MM/dd HH:mm:ss'}} "
+                                        flexGrow="3"></Label>
+                                </FlexboxLayout>
+                            </StackLayout>
+                        </GridLayout>
+                    </ng-template>
+                </ListView>
+            </StackLayout>
+        </TabContentItem>
+        <TabContentItem>
+            <StackLayout orientation="vertical">
+                <ListView [items]="sourceList"
+                    (itemTap)="onItemSource($event)" height="100%">
+                    <ng-template let-source="item">
+                        <GridLayout columns="auto" rows="auto" width="100%"
+                            height="230px">
+                            <StackLayout orientation="vertical" width="100%">
+                                <Label class="heading" textwrap="true"
+                                    verticalAlignment="bottom"
+                                    horizontalAlignment="left"
+                                    text="{{source?.name}}">
+                                </Label>
+                                <Label textwrap="true"
+                                    verticalAlignment="bottom"
+                                    horizontalAlignment="left"
+                                    text="{{source?.description}}">
+                                </Label>
+
+                                <FlexboxLayout flexDirection="row-reverse">
+                                    <Label
+                                        text="Category: {{source?.category}}"
+                                        flexGrow="1"></Label>
+                                    <Label
+                                        text="Language: {{source?.language}}"
+                                        flexGrow="2"></Label>
+                                    <Label
+                                        text="Country: {{source?.country}} "
+                                        flexGrow="3"></Label>
+                                </FlexboxLayout>
+                            </StackLayout>
+                        </GridLayout>
+                    </ng-template>
+                </ListView>
+            </StackLayout>
+        </TabContentItem>
+        <TabContentItem>
+            <!-- Search Tabs Section-->
+            <StackLayout orientation="vertical">
+                <TextField height="130px" [(ngModel)]="textFieldValue"
+                    hint="Enter text..." returnPress="onSearch()">
+                </TextField>
+                <Button text="Search" backgroundColor="#2C7DF1" color="#fff"
+                    (tap)="onSearch()"></Button>
+                <ListView [items]="searchList" (itemTap)="onItemTap($event)"
+                    height="100%">
+                    <ng-template let-article="item">
+                        <GridLayout columns="auto" rows="auto" width="100%"
+                            height="230px">
+
+                            <StackLayout orientation="vertical" width="100%">
+                                <Image class="newImage"
+                                    src="{{article?.urlToImage}}">
+                                </Image>
+                                <Label class="heading" textwrap="true"
+                                    verticalAlignment="bottom"
+                                    horizontalAlignment="left"
+                                    text="{{article?.title}}">
+                                </Label>
+                                <Label textwrap="true"
+                                    verticalAlignment="bottom"
+                                    horizontalAlignment="left"
+                                    text="{{article?.description}}">
+                                </Label>
+
+                                <FlexboxLayout flexDirection="row-reverse">
+                                    <Label text="- {{article?.source?.name}}"
+                                        flexGrow="1"></Label>
+                                    <Label
+                                        text="{{article?.publishedAt | date: 'yyyy/MM/dd HH:mm:ss'}} "
+                                        flexGrow="3"></Label>
+                                </FlexboxLayout>
+                            </StackLayout>
+                        </GridLayout>
+                    </ng-template>
+                </ListView>
+            </StackLayout>
+        </TabContentItem>
+    </Tabs>
+</StackLayout>
