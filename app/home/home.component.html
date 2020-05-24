@@ -17,7 +17,7 @@
         </TabStrip>
         <TabContentItem>
             <StackLayout orientation="vertical">
-                <ListView [items]="newsList" (itemTap)="onItemTap($event)"
+                <ListView (swipe)="swipe($event, 'newsList')" [items]="newsList" (itemTap)="onItemTap($event)"
                     height="100%">
                     <ng-template let-article="item">
                         <GridLayout columns="auto" rows="auto" width="100%"
@@ -53,7 +53,7 @@
         </TabContentItem>
         <TabContentItem>
             <StackLayout orientation="vertical">
-                <ListView [items]="sourceList"
+                <ListView  (swipe)="swipe($event, 'sourceList')" [items]="sourceList"
                     (itemTap)="onItemSource($event)" height="100%">
                     <ng-template let-source="item">
                         <GridLayout columns="auto" rows="auto" width="100%"
